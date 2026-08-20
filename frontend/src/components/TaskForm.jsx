@@ -35,14 +35,14 @@ function TaskForm({ taskToEdit, onSubmit, onCancel }) {
 
       <input
         type="text"
-        placeholder="Task title"
+        placeholder="Title"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
         required
       />
 
       <textarea
-        placeholder="Task description"
+        placeholder="Description"
         value={description}
         onChange={(event) => setDescription(event.target.value)}
       />
@@ -51,9 +51,9 @@ function TaskForm({ taskToEdit, onSubmit, onCancel }) {
         value={priority}
         onChange={(event) => setPriority(event.target.value)}
       >
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
       </select>
 
       <button type="submit">
