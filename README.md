@@ -21,6 +21,9 @@ npm start
 
 Frontend runs on `http://localhost:3000`.
 
+Time required ~ 140 mins
+
+
 ## API
 
 | Method | Endpoint                | Description            |
@@ -36,3 +39,9 @@ Frontend runs on `http://localhost:3000`.
 * Tasks are stored in memory as required, so data resets when the backend restarts.
 * Task titles must be unique.
 * Task priority can be `low`, `medium`, or `high`.
+
+Stylin & Polish ~ 30 mins
+
+Bonus:
+- Sorting
+- Dark & Light Theme

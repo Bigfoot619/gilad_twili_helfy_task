@@ -153,7 +153,30 @@ function App() {
     const timeDiff = new Date(b.createdAt) - new Date(a.createdAt);
     return timeDiff;
   }
+  // Sort by priority
+  if (sort === "priority") {
+    const priorityOrder = {
+      high: 1,
+      medium: 2,
+      low: 3,
+    };
 
+    const priorityDiff = priorityOrder[a.priority] - priorityOrder[b.priority];
+    return priorityDiff;
+  }
+
+  // Sort by title
+  if (sort === "title") {
+    if (a.title > b.title) {
+      return 1;
+    }
+
+    if (a.title < b.title) {
+      return -1;
+    }
+
+    return 0;
+  }
   });
 
   ///////////////////////////////////////////////////////////////////////////
