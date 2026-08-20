@@ -11,7 +11,7 @@ npm start
 
 Backend runs on `http://localhost:4000`.
 
-Time required ~ 50 mins
+Time required ~ 70 mins
 
 ### Frontend
 
