@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
+import "./styles/App.css";
 import TaskForm from "./components/TaskForm";
 import TaskItem from "./components/TaskItem";
+import TaskFilter from "./components/TaskFilter";
+import {getTasks, createTask, updateTask, deleteTask, toggleTask} from "./services/taskService";
 
-import {getTasks, createTask, updateTask, deleteTask} from "./services/taskService";
+///////////////////////////////////////////////////////////////////////////
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [filter, setFilter] = useState("all");
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  ///////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     loadTasks();
   }, []);
 
+  // Load tasks from the backend
   const loadTasks = async () => {
     try {
       setLoading(true);
@@ -31,6 +38,9 @@ function App() {
     }
   };
 
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Handle form submission for creating or editing a task
   const handleSubmit = async (taskData) => {
     try {
       setError("");
@@ -61,11 +71,16 @@ function App() {
         newTask,
       ]);
     } catch (error) {
-      setError(error.response?.data?.message || "Failed to save task");}
+      setError(
+        error.response?.data?.message || "Failed to save task");
+    }
   };
 
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Handle task deletion
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("Press OK to confirm deletion");
+    const confirmed = window.confirm("Are you sure you want to delete this task?");
 
     if (!confirmed) {
       return;
@@ -85,10 +100,48 @@ function App() {
         setTaskToEdit(null);
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Failed to delete task");
+      setError(
+        error.response?.data?.message || "Failed to delete task");
+    }
+  };
+  
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Handle toggling task completion status
+  const handleToggle = async (id) => {
+    try {
+      setError("");
+
+      const updatedTask = await toggleTask(id);
+
+      setTasks((currentTasks) =>
+        currentTasks.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task
+        )
+      );
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to update task status");
     }
   };
 
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Filter tasks based on the selected filter
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") {
+      return task.completed;
+    }
+
+    if (filter === "pending") {
+      return !task.completed;
+    }
+
+    return true;
+  });
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  // Render the UI
   return (
     <main>
       <h1>Task Manager</h1>
@@ -101,22 +154,28 @@ function App() {
 
       <h2>Tasks</h2>
 
+      <TaskFilter
+        filter={filter}
+        onFilterChange={setFilter}
+      />
+
       {loading ? (
         <p>Loading Tasks...</p>
-      ) : tasks.length === 0 ? (
-        <p>No Tasks yet</p>
+      ) : filteredTasks.length === 0 ? (
+        <p>No Tasks found</p>
       ) : (
-        tasks.map((task) => (
+        filteredTasks.map((task) => (
           <TaskItem
             key={task.id}
             task={task}
             onEdit={setTaskToEdit}
             onDelete={handleDelete}
+            onToggle={handleToggle}
           />
         ))
       )}
-    
-    {error && <p className="error">{error}</p>}
+
+      {error && <p className="error">{error}</p>}
     </main>
   );
 }

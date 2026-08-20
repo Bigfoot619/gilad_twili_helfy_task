@@ -1,0 +1,23 @@
+.priority-low {
+  color: lightgreen;
+  font-weight: bold;
+}
+
+.priority-medium {
+  color: orange;
+  font-weight: bold;     
+}
+
+.priority-high {
+  color: purple;
+  font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+button:hover {
+  background-color:lightgray;
+}

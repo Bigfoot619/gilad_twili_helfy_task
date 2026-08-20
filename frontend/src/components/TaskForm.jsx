@@ -51,9 +51,9 @@ function TaskForm({ taskToEdit, onSubmit, onCancel }) {
         value={priority}
         onChange={(event) => setPriority(event.target.value)}
       >
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
       </select>
 
       <button type="submit">
