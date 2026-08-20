@@ -90,3 +90,15 @@ button:hover {
     width: 220px;
   }
 }
+
+.light-mode {
+  background-color: white;
+  color: black;
+  min-height: 100vh;
+}
+
+.dark-mode {
+  background-color: #222;
+  color: white;
+  min-height: 100vh;
+}

@@ -4,6 +4,7 @@ import TaskForm from "./components/TaskForm";
 import TaskFilter from "./components/TaskFilter";
 import {getTasks, createTask, updateTask, deleteTask, toggleTask} from "./services/taskService";
 import TaskList from "./components/TaskList";
+import TaskSort from "./components/TaskSort";
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -14,6 +15,9 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [sort, setSort] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
 
   ///////////////////////////////////////////////////////////////////////////
 
@@ -141,10 +145,27 @@ function App() {
 
   ///////////////////////////////////////////////////////////////////////////
 
+  //BONUS: Sort tasks based on the selected sort option
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
+
+  // Sort by date
+  if (sort === "date") {
+    const timeDiff = new Date(b.createdAt) - new Date(a.createdAt);
+    return timeDiff;
+  }
+
+  });
+
+  ///////////////////////////////////////////////////////////////////////////
+
   // Render the UI
   return (
-    <main>
+    <main className={darkMode ? "dark-mode" : "light-mode"}>
       <h1>Task Manager</h1>
+      
+      <button onClick={() => setDarkMode(!darkMode)}>
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </button>
 
       <TaskForm
         taskToEdit={taskToEdit}
@@ -158,12 +179,14 @@ function App() {
         filter={filter}
         onFilterChange={setFilter}
       />
+      
+      <TaskSort onSortChange={setSort} />
 
       {loading ? (
         <p>Loading Tasks...</p>
       ) : (
         <TaskList
-          tasks={filteredTasks}
+          tasks={sortedTasks}
           onEdit={setTaskToEdit}
           onDelete={handleDelete}
           onToggle={handleToggle}
