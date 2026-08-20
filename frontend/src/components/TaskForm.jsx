@@ -30,9 +30,10 @@ function TaskForm({ taskToEdit, onSubmit, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{taskToEdit ? "Edit Task" : "Add Task"}</h2>
+  <form onSubmit={handleSubmit}>
+    <h2>{taskToEdit ? "Edit Task" : "Add Task"}</h2>
 
+    <div className="form-fields">
       <input
         type="text"
         placeholder="Title"
@@ -41,7 +42,8 @@ function TaskForm({ taskToEdit, onSubmit, onCancel }) {
         required
       />
 
-      <textarea
+      <input
+        type="text"
         placeholder="Description"
         value={description}
         onChange={(event) => setDescription(event.target.value)}
@@ -65,7 +67,8 @@ function TaskForm({ taskToEdit, onSubmit, onCancel }) {
           Cancel
         </button>
       )}
-    </form>
+    </div>
+  </form>
   );
 }
 

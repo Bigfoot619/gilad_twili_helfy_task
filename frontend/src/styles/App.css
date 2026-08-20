@@ -1,3 +1,17 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.form-fields textarea {
+  resize: none;
+}
 .priority-low {
   color: lightgreen;
   font-weight: bold;
@@ -36,7 +50,7 @@ button:hover {
   width: max-content;
   gap: 20px;
 
-  animation: carousel-scroll 15s linear infinite;
+  animation: carousel-scroll 16s linear infinite;
 }
 
 .task-item {
@@ -53,7 +67,8 @@ button:hover {
 }
 
 .task-item:hover {
-  transform: scale(1.03);
+  transform: scale(1.1);
+  
 }
 
 .carousel:hover .carousel-track {
