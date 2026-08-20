@@ -14,10 +14,10 @@ app.use(express.json());
 // Routes
 app.use("/api/tasks", taskRouter);
 
+// Not found route handler
 app.use(notFoundHandler);
 
+// Error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Task Manager Server is running on ${PORT}`);
-});
+app.listen(PORT, () => {console.log(`Task Manager Server is running on ${PORT}`)});

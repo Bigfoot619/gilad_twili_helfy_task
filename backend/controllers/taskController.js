@@ -30,9 +30,7 @@ export const createTask = (req, res) => {
   // Check for duplicate title
   title.trim();
   const lowerCaseTitle = title.toLowerCase();
-  const isTaskExists = tasks.some(
-      (task) => task.title.toLowerCase() === lowerCaseTitle
-    );
+  const isTaskExists = tasks.some((task) => task.title.toLowerCase() === lowerCaseTitle);
     
     if (isTaskExists) {
         return res.status(409).json({
@@ -112,6 +110,7 @@ export const deleteTask = (req, res) => {
     });
   }
 
+  // Remove the task and organize the array to maintain the order of tasks
   tasks.splice(taskIndex, 1);
 
   res.status(204).send();
