@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./styles/App.css";
 import TaskForm from "./components/TaskForm";
-import TaskItem from "./components/TaskItem";
 import TaskFilter from "./components/TaskFilter";
 import {getTasks, createTask, updateTask, deleteTask, toggleTask} from "./services/taskService";
+import TaskList from "./components/TaskList";
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -161,18 +161,13 @@ function App() {
 
       {loading ? (
         <p>Loading Tasks...</p>
-      ) : filteredTasks.length === 0 ? (
-        <p>No Tasks found</p>
       ) : (
-        filteredTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            onEdit={setTaskToEdit}
-            onDelete={handleDelete}
-            onToggle={handleToggle}
-          />
-        ))
+        <TaskList
+          tasks={filteredTasks}
+          onEdit={setTaskToEdit}
+          onDelete={handleDelete}
+          onToggle={handleToggle}
+        />
       )}
 
       {error && <p className="error">{error}</p>}

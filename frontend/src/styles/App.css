@@ -5,7 +5,7 @@
 
 .priority-medium {
   color: orange;
-  font-weight: bold;     
+  font-weight: bold;
 }
 
 .priority-high {
@@ -14,10 +14,64 @@
 }
 
 .error {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color:lightgray;
+  background-color: lightgray;
+}
+
+
+/* Carousel */
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  gap: 20px;
+
+  animation: carousel-scroll 15s linear infinite;
+}
+
+.task-item {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 15px;
+
+  border: 1px solid lightgray;
+  border-radius: 8px;
+
+  background-color: white;
+
+  transition: transform 0.2s;
+}
+
+.task-item:hover {
+  transform: scale(1.03);
+}
+
+.carousel:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes carousel-scroll {
+  from {
+    transform: translateX(100vw);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 600px) {
+  .task-item {
+    width: 220px;
+  }
 }

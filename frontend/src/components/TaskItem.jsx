@@ -6,8 +6,7 @@ function TaskItem({ task, onEdit, onDelete, onToggle }) {
       <p>{task.description}</p>
 
       <p>
-        Priority: 
-        <span className={`priority-${task.priority}`}>
+        Priority: <span className={`priority-${task.priority}`}>
           {task.priority}
         </span>
       </p>
