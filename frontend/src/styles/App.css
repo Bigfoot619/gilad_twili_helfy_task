@@ -102,3 +102,8 @@ button:hover {
   color: white;
   min-height: 100vh;
 }
+
+.dark-mode .task-item {
+  background-color: #333;
+  color: white;
+}
